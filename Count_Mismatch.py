@@ -24,6 +24,7 @@ test_targets = TEST_SET['Target context sequence']
 # df = pd.DataFrame(excel_file)
 # targets = df['Target']
 
+# mismatch 찾기
 def mismatch(test_target,training_target):
     count = 0
     for i in range(0,len(test_target)):
@@ -33,6 +34,7 @@ def mismatch(test_target,training_target):
         if count > CNT: break
     return count
 
+# 결과 print만 하는 함수
 def get_data(tests,trainings):
     for test in tests:
         if pd.notnull(test):
@@ -41,11 +43,12 @@ def get_data(tests,trainings):
                     if mismatch(test, training) <= CNT:
                         print(test + "\n" + training + " >>>", mismatch(test, training))
 
-
+# 중복 seq 제외 하기 위한 filter
 def make_set(targets):
     return {x for x in targets if pd.notna(x)}
     # return set(sets)
 
+# 각 seq 마다 mismatch 담기 위한 dict 
 def make_dic(set_val):
     seq_dict = dict()
     for s in set_val:
@@ -55,6 +58,7 @@ def make_dic(set_val):
         seq_dict[s] = mismtch_dict
     return seq_dict
 
+# 결과 생성
 def get_data2(tests_dict,trainings):
     for test in tests_dict.keys():
         if pd.notnull(test):
@@ -65,6 +69,7 @@ def get_data2(tests_dict,trainings):
                         temp[str(mismatch(test, training) )] += 1
     return tests_dict
 
+# 결과를 excel로 만드는 함수
 def make_excel(result):
     df = pd.DataFrame(result)
     df_transe = df.T
