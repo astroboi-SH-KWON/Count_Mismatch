@@ -82,7 +82,3 @@ class Utils:
                 sheet.cell(row=row, column=col, value=val)
             row = row + 1
         workbook.save(filename=self.path + str(clock()) + self.ext_xlsx)
-
-
-
-

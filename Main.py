@@ -1,4 +1,3 @@
-
 from time import clock
 """
 length가 같은 training과 test의 seq를 idx순서로 1:1 비교하여
